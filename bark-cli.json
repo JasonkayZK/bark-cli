@@ -1,0 +1,6 @@
+{
+    "port": 8080,
+    "host": "123",
+    "key": "gg",
+    "hello": "test"
+}
