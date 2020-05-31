@@ -1,8 +1,56 @@
 package flags
 
 import (
+	"github.com/jasonkayzk/bark-cli/utils"
 	"github.com/urfave/cli/v2"
+	"path/filepath"
 )
+
+const (
+	HostValueDefault = "https://api.day.app"
+	PortValueDefault = 443
+	KeyValueDefault  = ""
+)
+
+var DefaultConfigPath string
+
+var hostValue string
+var portValue int64
+var keyValue string
+
+// init the config flags: host, port & key from DefaultConfigPath or Default value
+func init() {
+	DefaultConfigPath = utils.Home() + string(filepath.Separator) + "bark-cli" + string(filepath.Separator) + "bark-cli.json"
+	if utils.ConfigExist(DefaultConfigPath) {
+		config, err := utils.LoadConfig(DefaultConfigPath)
+		if err != nil {
+			hostValue = HostValueDefault
+			portValue = PortValueDefault
+			keyValue = KeyValueDefault
+			return
+		}
+
+		if config.Host != "" {
+			hostValue = config.Host
+		} else {
+			hostValue = HostValueDefault
+		}
+		if config.Port > 0 {
+			portValue = config.Port
+		}else {
+			portValue = PortValueDefault
+		}
+		if config.Key != "" {
+			keyValue = config.Key
+		} else {
+			keyValue = KeyValueDefault
+		}
+	} else {
+		hostValue = HostValueDefault
+		portValue = PortValueDefault
+		keyValue = KeyValueDefault
+	}
+}
 
 func SetupApplicationFlags(app *cli.App) {
 	setHostFlag(app)
@@ -37,7 +85,7 @@ func setBodyFlag(app *cli.App) {
 
 func setUrlFlag(app *cli.App) {
 	app.Flags = append(app.Flags, &cli.StringFlag{
-		Name:    "url",
+		Name:    "barkUrl",
 		Aliases: []string{"u"},
 		Value:   "",
 		Usage:   "notification url",
@@ -46,7 +94,7 @@ func setUrlFlag(app *cli.App) {
 
 func setCopyContentFlag(app *cli.App) {
 	app.Flags = append(app.Flags, &cli.StringFlag{
-		Name:    "copy",
+		Name:    "barkCopy",
 		Aliases: []string{"c"},
 		Value:   "",
 		Usage:   "notification copy content",
@@ -84,7 +132,7 @@ func setPortFlag(app *cli.App) {
 	app.Flags = append(app.Flags, &cli.Int64Flag{
 		Name:    "port",
 		Aliases: []string{"p"},
-		Value:   443,
+		Value:   portValue,
 		Usage:   "bark server port number",
 	})
 }
@@ -92,7 +140,7 @@ func setPortFlag(app *cli.App) {
 func setHostFlag(app *cli.App) {
 	app.Flags = append(app.Flags, &cli.StringFlag{
 		Name:  "host",
-		Value: "https://api.day.app",
+		Value: hostValue,
 		Usage: "bark server host location",
 	})
 }
@@ -101,7 +149,9 @@ func setKeyFlag(app *cli.App) {
 	app.Flags = append(app.Flags, &cli.StringFlag{
 		Name:    "key",
 		Aliases: []string{"k"},
-		Value:   "",
+		Value:   keyValue,
 		Usage:   "secret key from bark, such as: https://api.day.app/{key}/content",
 	})
 }
+
+

@@ -1,5 +1,5 @@
 {
-    "port": 8080,
-    "host": "123",
-    "key": "gg",
+    "port": 443,
+    "host": "https://api.day.app",
+    "key": ""
 }

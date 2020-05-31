@@ -6,11 +6,9 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"net/url"
+	"strings"
 	"time"
-)
-
-const (
-	contentType = "application/json; charset=utf-8"
 )
 
 type ResponseMessage struct {
@@ -51,15 +49,24 @@ func Get(url string) (ResponseMessage, error) {
 }
 
 // Post request
-func Post(url string, data interface{}) (ResponseMessage, error) {
+func Post(url string, data *url.Values) (ResponseMessage, error) {
 	// 超时时间：5秒
 	client := &http.Client{Timeout: 5 * time.Second}
-	jsonStr, _ := json.Marshal(data)
-	resp, err := client.Post(url, contentType, bytes.NewBuffer(jsonStr))
+
+	request, err := http.NewRequest("POST", url, strings.NewReader(data.Encode()))
 	if err != nil {
 		return ResponseMessage{}, err
 	}
-	defer resp.Body.Close()
+	defer request.Body.Close()
+
+	request.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	request.Header.Add("Accept", "*/*")
+	request.Header.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3100.0 Safari/537.36")
+
+	resp, err := client.Do(request)
+	if err != nil {
+		return ResponseMessage{}, err
+	}
 
 	result, _ := ioutil.ReadAll(resp.Body)
 
@@ -68,6 +75,5 @@ func Post(url string, data interface{}) (ResponseMessage, error) {
 	if err != nil {
 		return ResponseMessage{}, err
 	}
-
 	return message, nil
 }
