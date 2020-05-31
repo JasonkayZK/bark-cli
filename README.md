@@ -1,6 +1,6 @@
 <!-- PROJECT SHIELDS -->
 
- [![Build Status](https://travis-ci.org/JasonkayZK/bark-cli.svg?branch=master)](https://travis-ci.org/JasonkayZK/bark-cli) ![Go](https://img.shields.io/github/go-mod/go-version/JasonkayZK/bark-cli) ![repo-size](https://img.shields.io/github/repo-size/JasonkayZK/bark-cli)![stars](https://img.shields.io/github/stars/JasonkayZK/bark-cli?style=social) ![MIT License](https://img.shields.io/github/license/JasonkayZK/bark-cli)
+ [![Build Status](https://travis-ci.org/JasonkayZK/bark-cli.svg?branch=master)](https://travis-ci.org/JasonkayZK/bark-cli) ![Go](https://img.shields.io/github/go-mod/go-version/JasonkayZK/bark-cli) ![repo-size](https://img.shields.io/github/repo-size/JasonkayZK/bark-cli) ![stars](https://img.shields.io/github/stars/JasonkayZK/bark-cli?style=social) ![MIT License](https://img.shields.io/github/license/JasonkayZK/bark-cli)
 
 <!-- PROJECT LOGO -->
 
@@ -82,9 +82,10 @@ Before doing so, make sure that you have installed `Golang >= v1.12`.
 
 ##### Install as Go-Modules project
 
-Then do following steps to build a stardard go-modules project
+Do following steps to build a stardard go-modules project
 
-2. Clone this repository
+1.  Clone this repository
+
 ```sh
 git clone git@github.com:JasonkayZK/bark-cli.git
 ```

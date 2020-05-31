@@ -25,11 +25,14 @@ run:
 # Cross compilation
 # mac
 build-mac:
+	test
 	CGO_ENABLED=0 $(GOBUILD) -o $(MAC_BINARY_NAME)/$(NAME)
 
 # linux
 build-linux:
+	test
 	CGO_ENABLED=0 GOOS=windows GOARCH=amd64 $(GOBUILD) -o $(LINUX_BINARY_NAME)/$(NAME)
 # windows
 build-win:
+	test
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(WIN_BINARY_NAME)/$(NAME).exe
