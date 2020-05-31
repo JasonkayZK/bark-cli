@@ -1,0 +1,31 @@
+language: go
+go:
+  - 1.12.x
+  - 1.14.x
+  - master
+
+env:
+  - GO111MODULE=on
+
+script:
+  - make all
+
+before_deploy:
+  - sudo apt-get -y install zip
+  - cd bin/
+  - zip -r ../win-x64.zip win/ -r
+  - zip -r ../linux-x64.zip linux/ -r
+  - zip -r ../mac-x64.zip mac/ -r
+  -
+  - cd ../
+
+deploy:
+  provider: releases
+  api_key: ${API_KEY}
+  skip_cleanup: true
+  file:
+    - "./win-x64.zip"
+    - "./linux-x64.zip"
+    - "./mac-x64.zip"
+  on:
+    tags: true
