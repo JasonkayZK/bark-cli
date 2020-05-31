@@ -9,15 +9,17 @@ import (
 	"time"
 )
 
+const (
+	contentType = "application/json; charset=utf-8"
+)
+
 type ResponseMessage struct {
 	Code int64 `json:"code"`
 	Data string `json:"data"`
 	Message string `json:"message"`
 }
 
-// 发送GET请求
-// url：         请求地址
-// response：    请求返回的内容
+// Get request
 func Get(url string) (ResponseMessage, error) {
 	// timeout：5s
 	client := &http.Client{Timeout: 5 * time.Second}
@@ -48,12 +50,8 @@ func Get(url string) (ResponseMessage, error) {
 	return message, nil
 }
 
-// 发送POST请求
-// url：         请求地址
-// data：        POST请求提交的数据
-// contentType： 请求体格式，如：application/json
-// content：     请求放回的内容
-func Post(url string, data interface{}, contentType string) (ResponseMessage, error) {
+// Post request
+func Post(url string, data interface{}) (ResponseMessage, error) {
 	// 超时时间：5秒
 	client := &http.Client{Timeout: 5 * time.Second}
 	jsonStr, _ := json.Marshal(data)
@@ -65,6 +63,11 @@ func Post(url string, data interface{}, contentType string) (ResponseMessage, er
 
 	result, _ := ioutil.ReadAll(resp.Body)
 
+	message := ResponseMessage{}
+	err = json.Unmarshal(result, &message)
+	if err != nil {
+		return ResponseMessage{}, err
+	}
 
-	return result
+	return message, nil
 }

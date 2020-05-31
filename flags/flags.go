@@ -1,9 +1,7 @@
 package flags
 
 import (
-	"github.com/jasonkayzk/bark-cli/utils"
 	"github.com/urfave/cli/v2"
-	"os"
 )
 
 func SetupApplicationFlags(app *cli.App) {
@@ -21,46 +19,46 @@ func SetupApplicationFlags(app *cli.App) {
 
 func setTitleFlag(app *cli.App) {
 	app.Flags = append(app.Flags, &cli.StringFlag{
-		Name: "title",
+		Name:    "title",
 		Aliases: []string{"t"},
-		Value: "",
-		Usage: "notification title",
+		Value:   "",
+		Usage:   "notification title",
 	})
 }
 
 func setBodyFlag(app *cli.App) {
 	app.Flags = append(app.Flags, &cli.StringFlag{
-		Name: "body",
+		Name:    "body",
 		Aliases: []string{"b"},
-		Value: "",
-		Usage: "notification body",
+		Value:   "Empty Body",
+		Usage:   "notification body",
 	})
 }
 
 func setUrlFlag(app *cli.App) {
 	app.Flags = append(app.Flags, &cli.StringFlag{
-		Name: "url",
+		Name:    "url",
 		Aliases: []string{"u"},
-		Value: "",
-		Usage: "notification url",
+		Value:   "",
+		Usage:   "notification url",
 	})
 }
 
 func setCopyContentFlag(app *cli.App) {
 	app.Flags = append(app.Flags, &cli.StringFlag{
-		Name: "copy",
+		Name:    "copy",
 		Aliases: []string{"c"},
-		Value: "",
-		Usage: "notification copy content",
+		Value:   "",
+		Usage:   "notification copy content",
 	})
 }
 
 func setAutoCopyFlag(app *cli.App) {
 	app.Flags = append(app.Flags, &cli.BoolFlag{
-		Name: "autoCopy",
+		Name:    "autoCopy",
 		Aliases: []string{"a"},
-		Value: false,
-		Usage: "enable automaticallyCopy for notification",
+		Value:   false,
+		Usage:   "enable automaticallyCopy for notification",
 	})
 }
 
@@ -77,7 +75,7 @@ func setConfigFileFlag(app *cli.App) {
 	app.Flags = append(app.Flags, &cli.StringFlag{
 		Name:    "file",
 		Aliases: []string{"f"},
-		Value:   utils.Home() + string(os.PathSeparator) + "bark-cli" + string(os.PathSeparator) + "bark-cli.json",
+		Value:   "",
 		Usage:   "config bark-cli parameter from json file, such as: host, port, key, ...",
 	})
 }
@@ -93,9 +91,9 @@ func setPortFlag(app *cli.App) {
 
 func setHostFlag(app *cli.App) {
 	app.Flags = append(app.Flags, &cli.StringFlag{
-		Name:    "host",
-		Value:   "https://api.day.app",
-		Usage:   "bark server host location",
+		Name:  "host",
+		Value: "https://api.day.app",
+		Usage: "bark server host location",
 	})
 }
 
