@@ -265,6 +265,8 @@ func setGenerateConfigCommand(app *cli.App) {
 					if err != nil || !ok {
 						return fmt.Errorf("write config err: %s\n", err)
 					}
+
+					fmt.Println("config updated at: " + flags.DefaultConfigPath)
 					return nil
 				},
 			},
