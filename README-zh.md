@@ -16,8 +16,8 @@
     A simple terminal tool for <a href="https://github.com/Finb/Bark">bark</a>
     <br />
     <br />
-    <a href="https://github.com/JasonkayZK/bark-cli/README-zh.md">简体中文</a> ·
-    <a href="https://github.com/JasonkayZK/bark-cli/README.md">English</a>·
+    <a href="https://github.com/JasonkayZK/bark-cli/blob/master/README-zh.md">简体中文</a> ·
+    <a href="https://github.com/JasonkayZK/bark-cli/blob/master/README.md">English</a>·
     <a href="https://github.com/JasonkayZK/bark-cli/issues">报告 Bug</a>
     ·
     <a href="https://github.com/JasonkayZK/bark-cli/pulls">提交新特性</a>
